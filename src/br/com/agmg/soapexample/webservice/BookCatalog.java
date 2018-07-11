@@ -7,19 +7,20 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
+import br.com.agmg.soapexample.exception.InvalidBookReference;
 import br.com.agmg.soapexample.model.Book;
 
-@WebService(name="br.com.agmg.soapexample.webservice.BookCatalog", targetNamespace="http://www.agmg.soapexample.com.br")
+@WebService(name="BookCatalog", targetNamespace="http://www.agmg.soapexample.com.br")
 public interface BookCatalog {
 
-	@WebMethod(action="addbook", operationName="addBook")
-	public void addBook(@WebParam(name="book") Book newBook);
+	@WebMethod(action="add_book", operationName="addBook")
+	public void addBook(@WebParam(name="Book") Book newBook);
 	
-	@WebMethod(action="getbook", operationName="getBook")
+	@WebMethod(action="get_book", operationName="getBook")
 	@WebResult(name="Book")
-	public Book getBook(@WebParam(name="isbn") String isbn);
+	public Book getBook(@WebParam(name="Isbn") String isbn) throws InvalidBookReference;
 	
-	@WebMethod(action="getbooks", operationName="getBooks")
-	@WebResult(name="Books")
+	@WebMethod(action="get_books", operationName="getBooks")
+	@WebResult(name="Book")
 	public List<Book> getBooks();
 }
